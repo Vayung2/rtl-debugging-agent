@@ -1,0 +1,252 @@
+[
+  {
+    "case_id": "fetch_queue_flush_ignored",
+    "problem_id": "P6",
+    "title": "Real Fetch Decode Queue Reconstruction",
+    "bug_class": "flush_priority",
+    "bug_summary": "The fetch/decode queue ignores a taken branch flush, so stale entries remain visible.",
+    "expected_failure": "FAIL branch_flush_did_not_clear",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL branch_flush_did_not_clear",
+      "stdout_tail": "RACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.063 MB sources in 4 modules, into 0.049 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.604 s (elab=0.001, cvt=0.005, bld=2.592); cpu 0.009 s on 1 threads; allocated 10.875 MB\nFAIL branch_flush_did_not_clear\n[47000] %Fatal: tb.sv:95: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p6_vaulrxob/tb.sv:95: Verilog $stop\nAborting...\n",
+      "stderr_tail": ""
+    },
+    "trace_summary": "After two writes, the head entry is read correctly. On the next cycle branch_flush.valid=1 and branch_flush.branch_taken=1, but empty remains 0 and filled does not reflect a cleared queue. Head/tail state behaved as if normal FIFO state was preserved through recovery."
+  },
+  {
+    "case_id": "fetch_queue_pc_payload_corrupt",
+    "problem_id": "P6",
+    "title": "Real Fetch Decode Queue Reconstruction",
+    "bug_class": "payload_integrity",
+    "bug_summary": "The queue enqueues instruction data but drops the matching PC payload.",
+    "expected_failure": "FAIL first_head_value",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL first_head_value",
+      "stdout_tail": "E=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.063 MB sources in 4 modules, into 0.049 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.577 s (elab=0.001, cvt=0.003, bld=2.570); cpu 0.007 s on 1 threads; allocated 10.734 MB\nFAIL first_head_value\n[27000] %Fatal: tb.sv:91: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p6_p_ifndal/tb.sv:91: Verilog $stop\nAborting...\n",
+      "stderr_tail": ""
+    },
+    "trace_summary": "Cycle after the first enqueue: write_data=0x000000aa and write_pc=0x80000000 were accepted while the queue was not full. The exposed head has the expected instruction data but read_pc is zero, showing that the PC array did not capture the enqueue payload."
+  },
+  {
+    "case_id": "icache_burst_resp_one_beat_early",
+    "problem_id": "P7",
+    "title": "Real Instruction Burst Adapter Reconstruction",
+    "bug_class": "multi_beat_protocol",
+    "bug_summary": "The burst adapter asserts cache_resp after the third beat instead of the fourth.",
+    "expected_failure": "FAIL no_response_after_four_beats",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL no_response_after_four_beats",
+      "stdout_tail": "VM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb__ConstPool__0__Slow.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.066 MB sources in 4 modules, into 0.058 MB in 7 C++ files needing 0.000 MB\n- Verilator: Walltime 2.566 s (elab=0.001, cvt=0.004, bld=2.558); cpu 0.009 s on 1 threads; allocated 10.766 MB\nFAIL no_response_after_four_beats\n[47000] %Fatal: tb.sv:94: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_6kubclte/tb.sv:94: Verilog $stop\nAborting...\n",
+      "stderr_tail": "%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_6kubclte/tb.sv:90:78: Operator ADD expects 64 bits on the RHS, but RHS's VARREF 'i' generates 32 bits.\n                                                                                              : ... note: In instance 'tb'\n   90 |       bmem_rvalid=1; bmem_raddr=32'h2000; bmem_rdata=64'h1111_0000_0000_0000 + i;\n      |                                                                              ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n"
+    },
+    "trace_summary": "The adapter sees four bmem_rvalid beats for address 0x2000. cache_resp rises while burst count corresponds to the third accepted beat, then returns idle; when the fourth beat arrives the response expected by the testbench is absent."
+  },
+  {
+    "case_id": "icache_burst_lane3_overwrites_lane0",
+    "problem_id": "P7",
+    "title": "Real Instruction Burst Adapter Reconstruction",
+    "bug_class": "multi_beat_protocol",
+    "bug_summary": "The fourth 64-bit memory beat overwrites lane 0 instead of lane 3.",
+    "expected_failure": "FAIL packed_burst_lanes",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL packed_burst_lanes",
+      "stdout_tail": "E_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb__ConstPool__0__Slow.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.066 MB sources in 4 modules, into 0.058 MB in 7 C++ files needing 0.000 MB\n- Verilator: Walltime 2.556 s (elab=0.001, cvt=0.004, bld=2.547); cpu 0.009 s on 1 threads; allocated 10.781 MB\nFAIL packed_burst_lanes\n[47000] %Fatal: tb.sv:95: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_c91dcutc/tb.sv:95: Verilog $stop\nAborting...\n",
+      "stderr_tail": "%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_c91dcutc/tb.sv:90:78: Operator ADD expects 64 bits on the RHS, but RHS's VARREF 'i' generates 32 bits.\n                                                                                              : ... note: In instance 'tb'\n   90 |       bmem_rvalid=1; bmem_raddr=32'h2000; bmem_rdata=64'h1111_0000_0000_0000 + i;\n      |                                                                              ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n"
+    },
+    "trace_summary": "Four matching beats are accepted for one cache-line request. The response cycle arrives at the right time, but cache_rdata[63:0] contains the last beat and cache_rdata[255:192] is missing it, indicating a lane-indexing bug in burst packing."
+  },
+  {
+    "case_id": "rat_commit_lost_during_flush",
+    "problem_id": "P8",
+    "title": "Real OoO RAT File Reconstruction",
+    "bug_class": "ooo_recovery",
+    "bug_summary": "A branch flush restores the speculative RAT from stale committed state and loses a simultaneous commit update.",
+    "expected_failure": "FAIL same_cycle_commit_flush_lost",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL same_cycle_commit_flush_lost",
+      "stdout_tail": "CE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.066 MB sources in 4 modules, into 0.067 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.588 s (elab=0.001, cvt=0.004, bld=2.579); cpu 0.009 s on 1 threads; allocated 11.219 MB\nFAIL same_cycle_commit_flush_lost\n[47000] %Fatal: tb.sv:94: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p8_lvsj66rh/tb.sv:94: Verilog $stop\nAborting...\n",
+      "stderr_tail": ""
+    },
+    "trace_summary": "The RAT first renames architectural register 5 to physical 46. In the same cycle, commit2rat.commit_update=1 for architectural register 5 and branch_flush is taken. After recovery, rs1_phy_idx for register 5 is not 46, so the flush copied the old committed map instead of preserving the same-cycle commit."
+  },
+  {
+    "case_id": "icache_reads_when_dcache_selected",
+    "problem_id": "P7",
+    "title": "Real Instruction Burst Adapter Reconstruction",
+    "bug_class": "real_history_arbitration",
+    "bug_summary": "Historical i-cache burst adapter bug: cache_read could start a memory transaction even when the i-cache was not chosen.",
+    "expected_failure": "FAIL icache_started_while_dcache_chosen",
+    "real_commit": "bbb61a8",
+    "real_commit_message": "fixed one more arbitration issue",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL icache_started_while_dcache_chosen",
+      "stdout_tail": "ACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb__ConstPool__0__Slow.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.065 MB sources in 4 modules, into 0.050 MB in 7 C++ files needing 0.000 MB\n- Verilator: Walltime 2.547 s (elab=0.001, cvt=0.004, bld=2.538); cpu 0.008 s on 1 threads; allocated 10.609 MB\nFAIL icache_started_while_dcache_chosen\n[7000] %Fatal: tb.sv:90: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_2v5om4tz/tb.sv:90: Verilog $stop\nAborting...\n",
+      "stderr_tail": ""
+    },
+    "trace_summary": "At idle, cache_read=1 while i_cache_chosen=0. bmem_read still pulses and the adapter captures the request address, which means the instruction side is stealing the memory port during a data-cache arbitration window."
+  },
+  {
+    "case_id": "rat_missing_same_cycle_rename_bypass",
+    "problem_id": "P8",
+    "title": "Real OoO RAT File Reconstruction",
+    "bug_class": "real_history_rename_bypass",
+    "bug_summary": "Historical RAT bug: same-cycle speculative destination bypass was missing for source reads.",
+    "expected_failure": "FAIL speculative_bypass",
+    "real_commit": "513f159",
+    "real_commit_message": "j test rat fix",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL speculative_bypass",
+      "stdout_tail": "=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.064 MB sources in 4 modules, into 0.062 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.570 s (elab=0.001, cvt=0.004, bld=2.562); cpu 0.008 s on 1 threads; allocated 11.188 MB\nFAIL speculative_bypass\n[8000] %Fatal: tb.sv:90: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p8_3_xo4gsr/tb.sv:90: Verilog $stop\nAborting...\n",
+      "stderr_tail": ""
+    },
+    "trace_summary": "Immediately after reset, read_rs1_idx names the same architectural register as specrd_idx, and specrd_mapping carries the newly allocated physical register. rs1_phy_idx still returns the old table value, so the combinational read path is not bypassing the same-cycle speculative rename mapping."
+  },
+  {
+    "case_id": "rob_dispatch_tag_stale",
+    "problem_id": "P10",
+    "title": "Real ROB File Reconstruction",
+    "bug_class": "real_history_dispatch_index",
+    "bug_summary": "Historical ROB bug: rob_idx_dispatch was registered, so dispatch observed a stale ROB index.",
+    "expected_failure": "FAIL second_dispatch_index_not_combinational",
+    "real_commit": "582bf6c",
+    "real_commit_message": "fixed multiplication, rob issues",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL second_dispatch_index_not_combinational",
+      "stdout_tail": "F=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb__ConstPool__0__Slow.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.071 MB sources in 4 modules, into 0.042 MB in 7 C++ files needing 0.000 MB\n- Verilator: Walltime 2.631 s (elab=0.001, cvt=0.004, bld=2.622); cpu 0.009 s on 1 threads; allocated 11.281 MB\nFAIL second_dispatch_index_not_combinational\n[17000] %Fatal: tb.sv:92: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mn978ay4/tb.sv:92: Verilog $stop\nAborting...\n",
+      "stderr_tail": "%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mn978ay4/candidate.sv:57:26: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                      : ... note: In instance 'tb.dut'\n   57 |             head <= head + 4'd1;\n      |                          ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mn978ay4/candidate.sv:69:30: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                      : ... note: In instance 'tb.dut'\n   69 |                 tail <= head + 4'd1;  \n      |                              ^\n%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mn978ay4/candidate.sv:114:26: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                       : ... note: In instance 'tb.dut'\n  114 |             tail <= tail + 4'd1;\n      |                          ^\n"
+    },
+    "trace_summary": "After the first allocation, the tail has advanced. Before the second allocation edge, dispatch needs rob_idx_dispatch=1 for the entry it is about to allocate. The buggy registered output still reports the previous value, so downstream rename/issue metadata would carry the wrong ROB tag."
+  },
+  {
+    "case_id": "freelist_alloc_count_stuck",
+    "problem_id": "P9",
+    "title": "Real OoO Freelist File Reconstruction",
+    "bug_class": "ooo_resource_accounting",
+    "bug_summary": "The freelist advances its head on allocation but fails to decrement the available-register count.",
+    "expected_failure": "FAIL three_allocations",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL three_allocations",
+      "stdout_tail": "=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.067 MB sources in 4 modules, into 0.083 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.565 s (elab=0.001, cvt=0.005, bld=2.556); cpu 0.010 s on 1 threads; allocated 11.391 MB\nFAIL three_allocations\n[67000] %Fatal: tb.sv:76: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_93p5b4fx/tb.sv:76: Verilog $stop\nAborting...\n",
+      "stderr_tail": "%Warning-WIDTHTRUNC: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_93p5b4fx/candidate.sv:57:49: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                    : ... note: In instance 'tb.dut'\n   57 |         frlist2rename.new_phy_rd = freelist_fifo[head];   \n      |                                                 ^\n                     ... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.046\n                     ... Use \"/* verilator lint_off WIDTHTRUNC */\" and lint_on around source to disable this message.\n%Warning-WIDTHTRUNC: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_93p5b4fx/candidate.sv:94:37: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                    : ... note: In instance 'tb.dut'\n   94 |                     committed_frlist[committed_tail] <= commit2frlist.old_phy_rd;\n      |                                     ^\n%Warning-WIDTHTRUNC: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_93p5b4fx/candidate.sv:98:38: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                    : ... note: In instance 'tb.dut'\n   98 |                         freelist_fifo[tail] <= commit2frlist.old_phy_rd;\n      |                                      ^\n%Warning-WIDTHTRUNC: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_93p5b4fx/candidate.sv:117:38: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                     : ... note: In instance 'tb.dut'\n  117 |                         freelist_fifo[committed_tail] <= commit2frlist.old_phy_rd;\n      |                                      ^\n"
+    },
+    "trace_summary": "After reset, the freelist exposes physical register 32 and count 32. Three accepted allocations advance the head to the entry that should expose physical register 35, but the reported count remains too high instead of dropping to 29. The allocation data path and the resource-accounting path are inconsistent."
+  },
+  {
+    "case_id": "rob_cdb_marks_head_not_target",
+    "problem_id": "P10",
+    "title": "Real ROB File Reconstruction",
+    "bug_class": "ooo_completion_ordering",
+    "bug_summary": "The ROB marks the head entry complete on any CDB completion instead of marking the CDB target ROB index.",
+    "expected_failure": "FAIL younger_ready_committed_before_head",
+    "real_commit": "",
+    "real_commit_message": "",
+    "compile": {
+      "ok": true,
+      "stage": "run",
+      "reason": "compiled successfully before simulation",
+      "stdout_tail": "",
+      "stderr_tail": ""
+    },
+    "simulation": {
+      "pass": false,
+      "stage": "run",
+      "reason": "FAIL younger_ready_committed_before_head",
+      "stdout_tail": "_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o verilated_threads.o /opt/homebrew/Cellar/verilator/5.046/share/verilator/include/verilated_threads.cpp\npython3 /opt/homebrew/Cellar/verilator/5.046/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb.cpp Vtb___024root__0.cpp Vtb__main.cpp Vtb__ConstPool__0__Slow.cpp Vtb___024root__Slow.cpp Vtb___024root__0__Slow.cpp Vtb__Syms__Slow.cpp > Vtb__ALL.cpp\nc++ -Os  -I.  -MMD -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include -I/opt/homebrew/Cellar/verilator/5.046/share/verilator/include/vltstd -DVERILATOR=1 -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TIMING=1 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -DVM_TRACE_SAIF=0 -faligned-new -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.072 MB sources in 4 modules, into 0.114 MB in 7 C++ files needing 0.001 MB\n- Verilator: Walltime 2.564 s (elab=0.001, cvt=0.006, bld=2.552); cpu 0.011 s on 1 threads; allocated 11.969 MB\nFAIL younger_ready_committed_before_head\n[37000] %Fatal: tb.sv:76: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mvxlzuq3/tb.sv:76: Verilog $stop\nAborting...\n",
+      "stderr_tail": "%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mvxlzuq3/candidate.sv:57:26: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                      : ... note: In instance 'tb.dut'\n   57 |             head <= head + 4'd1;\n      |                          ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mvxlzuq3/candidate.sv:69:30: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                      : ... note: In instance 'tb.dut'\n   69 |                 tail <= head + 4'd1;  \n      |                              ^\n%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_mvxlzuq3/candidate.sv:114:26: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                       : ... note: In instance 'tb.dut'\n  114 |             tail <= tail + 4'd1;\n      |                          ^\n"
+    },
+    "trace_summary": "Two entries are dispatched. The common data bus first completes the younger entry at ROB index 1, while the head at index 0 is still incomplete. rob2commit.commit nevertheless becomes high, so the CDB completion appears to have updated the head entry rather than the indexed entry named by common_data_bus.rob_idx."
+  }
+]

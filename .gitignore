@@ -1,0 +1,29 @@
+.DS_Store
+.env
+__pycache__/
+*.py[cod]
+
+# LaTeX build products. Keep final_report.pdf committed.
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# Generated simulator/temp outputs.
+obj_dir/
+*.vcd
+*.fst
+*.out
+
+# Avoid accidentally vendoring the full private/heavy processor repos.
+fa25_ece411_BSMC/
+mp_ooo_baseline/bin/
+mp_ooo_baseline/docs/
+mp_ooo_baseline/hvl/
+mp_ooo_baseline/lint/
+mp_ooo_baseline/sim/
+mp_ooo_baseline/sram/
+mp_ooo_baseline/synth/
+mp_ooo_baseline/testcode/

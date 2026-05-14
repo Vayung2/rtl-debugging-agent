@@ -1,0 +1,117 @@
+[
+  {
+    "case_id": "icache_reads_when_dcache_selected",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL icache_started_while_dcache_chosen"
+    }
+  },
+  {
+    "case_id": "rat_missing_same_cycle_rename_bypass",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P8",
+        "title": "Real OoO RAT File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P8",
+        "title": "Real OoO RAT File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL speculative_bypass"
+    }
+  },
+  {
+    "case_id": "rob_dispatch_tag_stale",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL second_dispatch_index_not_combinational"
+    }
+  },
+  {
+    "case_id": "freelist_flush_restores_speculative_checkpoint",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P9",
+        "title": "Real OoO Freelist File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P9",
+        "title": "Real OoO Freelist File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL restored_from_speculative_checkpoint"
+    }
+  },
+  {
+    "case_id": "rob_jalr_target_missing_rs1_base",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL jalr_target_missing_rs1_base"
+    }
+  }
+]

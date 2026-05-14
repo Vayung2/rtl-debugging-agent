@@ -1,0 +1,253 @@
+[
+  {
+    "case_id": "fetch_queue_flush_ignored",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P6",
+        "title": "Real Fetch Decode Queue Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P6",
+        "title": "Real Fetch Decode Queue Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": "et-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.063 MB sources in 4 modules, into 0.049 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.684 s (elab=0.001, cvt=0.003, bld=2.676); cpu 0.008 s on 1 threads; allocated 10.797 MB\nFAIL branch_flush_did_not_clear\n[47000] %Fatal: tb.sv:95: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p6_a2cdf5k3/tb.sv:95: Verilog $stop\nAborting...\n",
+        "stderr_tail": "",
+        "workdir": null
+      },
+      "reason": "FAIL branch_flush_did_not_clear"
+    }
+  },
+  {
+    "case_id": "fetch_queue_pc_payload_corrupt",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P6",
+        "title": "Real Fetch Decode Queue Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P6",
+        "title": "Real Fetch Decode Queue Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": "ew -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.063 MB sources in 4 modules, into 0.049 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.596 s (elab=0.001, cvt=0.003, bld=2.589); cpu 0.007 s on 1 threads; allocated 10.734 MB\nFAIL first_head_value\n[27000] %Fatal: tb.sv:91: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p6_exgljrhs/tb.sv:91: Verilog $stop\nAborting...\n",
+        "stderr_tail": "",
+        "workdir": null
+      },
+      "reason": "FAIL first_head_value"
+    }
+  },
+  {
+    "case_id": "icache_burst_resp_one_beat_early",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": "-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.066 MB sources in 4 modules, into 0.058 MB in 7 C++ files needing 0.000 MB\n- Verilator: Walltime 2.617 s (elab=0.001, cvt=0.004, bld=2.608); cpu 0.008 s on 1 threads; allocated 10.781 MB\nFAIL no_response_after_four_beats\n[47000] %Fatal: tb.sv:94: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_2u8titm0/tb.sv:94: Verilog $stop\nAborting...\n",
+        "stderr_tail": "%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_2u8titm0/tb.sv:90:78: Operator ADD expects 64 bits on the RHS, but RHS's VARREF 'i' generates 32 bits.\n                                                                                              : ... note: In instance 'tb'\n   90 |       bmem_rvalid=1; bmem_raddr=32'h2000; bmem_rdata=64'h1111_0000_0000_0000 + i;\n      |                                                                              ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n",
+        "workdir": null
+      },
+      "reason": "FAIL no_response_after_four_beats"
+    }
+  },
+  {
+    "case_id": "icache_burst_lane3_overwrites_lane0",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": " -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.066 MB sources in 4 modules, into 0.058 MB in 7 C++ files needing 0.000 MB\n- Verilator: Walltime 2.483 s (elab=0.001, cvt=0.004, bld=2.474); cpu 0.009 s on 1 threads; allocated 10.703 MB\nFAIL packed_burst_lanes\n[47000] %Fatal: tb.sv:95: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_0yta3usw/tb.sv:95: Verilog $stop\nAborting...\n",
+        "stderr_tail": "%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p7_0yta3usw/tb.sv:90:78: Operator ADD expects 64 bits on the RHS, but RHS's VARREF 'i' generates 32 bits.\n                                                                                              : ... note: In instance 'tb'\n   90 |       bmem_rvalid=1; bmem_raddr=32'h2000; bmem_rdata=64'h1111_0000_0000_0000 + i;\n      |                                                                              ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n",
+        "workdir": null
+      },
+      "reason": "FAIL packed_burst_lanes"
+    }
+  },
+  {
+    "case_id": "rat_commit_lost_during_flush",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P8",
+        "title": "Real OoO RAT File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P8",
+        "title": "Real OoO RAT File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": "-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.066 MB sources in 4 modules, into 0.067 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.476 s (elab=0.001, cvt=0.005, bld=2.467); cpu 0.009 s on 1 threads; allocated 11.250 MB\nFAIL same_cycle_commit_flush_lost\n[47000] %Fatal: tb.sv:94: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p8_2_f_ttz2/tb.sv:94: Verilog $stop\nAborting...\n",
+        "stderr_tail": "",
+        "workdir": null
+      },
+      "reason": "FAIL same_cycle_commit_flush_lost"
+    }
+  },
+  {
+    "case_id": "icache_reads_when_dcache_selected",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P7",
+        "title": "Real Instruction Burst Adapter Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL icache_started_while_dcache_chosen"
+    }
+  },
+  {
+    "case_id": "rat_missing_same_cycle_rename_bypass",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P8",
+        "title": "Real OoO RAT File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P8",
+        "title": "Real OoO RAT File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL speculative_bypass"
+    }
+  },
+  {
+    "case_id": "rob_dispatch_tag_stale",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "FAIL second_dispatch_index_not_combinational"
+    }
+  },
+  {
+    "case_id": "freelist_alloc_count_stuck",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P9",
+        "title": "Real OoO Freelist File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P9",
+        "title": "Real OoO Freelist File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": "w -fbracket-depth=4096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.067 MB sources in 4 modules, into 0.083 MB in 6 C++ files needing 0.000 MB\n- Verilator: Walltime 2.590 s (elab=0.001, cvt=0.005, bld=2.580); cpu 0.010 s on 1 threads; allocated 11.453 MB\nFAIL three_allocations\n[67000] %Fatal: tb.sv:76: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_tqyb3wtd/tb.sv:76: Verilog $stop\nAborting...\n",
+        "stderr_tail": " Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                    : ... note: In instance 'tb.dut'\n   94 |                     committed_frlist[committed_tail] <= commit2frlist.old_phy_rd;\n      |                                     ^\n%Warning-WIDTHTRUNC: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_tqyb3wtd/candidate.sv:98:38: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                    : ... note: In instance 'tb.dut'\n   98 |                         freelist_fifo[tail] <= commit2frlist.old_phy_rd;\n      |                                      ^\n%Warning-WIDTHTRUNC: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p9_tqyb3wtd/candidate.sv:117:38: Bit extraction of array[31:0] requires 5 bit index, not 6 bits.\n                                                                                                     : ... note: In instance 'tb.dut'\n  117 |                         freelist_fifo[committed_tail] <= commit2frlist.old_phy_rd;\n      |                                      ^\n",
+        "workdir": null
+      },
+      "reason": "FAIL three_allocations"
+    }
+  },
+  {
+    "case_id": "rob_cdb_marks_head_not_target",
+    "reference": {
+      "pass": true,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run"
+      },
+      "reason": "Hidden verification testbench passed."
+    },
+    "buggy": {
+      "pass": false,
+      "details": {
+        "problem_id": "P10",
+        "title": "Real ROB File Reconstruction",
+        "simulator": "verilator",
+        "stage": "run",
+        "stdout_tail": "096 -fcf-protection=none -Xclang -fno-pch-timestamp -Qunused-arguments -Wno-bool-operation -Wno-c++11-narrowing -Wno-constant-logical-operand -Wno-int-in-bool-context -Wno-non-pod-varargs -Wno-parentheses-equality -Wno-shadow -Wno-sign-compare -Wno-tautological-bitwise-compare -Wno-tautological-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-vla-cxx-extension    -DVL_TIME_CONTEXT   -std=gnu++20 -c -o Vtb__ALL.o Vtb__ALL.cpp\nc++  -Wl,-U,__Z15vl_time_stamp64v,-U,__Z13sc_time_stampv   verilated.o verilated_timing.o verilated_threads.o Vtb__ALL.a    -pthread -lpthread   -o Vtb\nrm Vtb__ALL.verilator_deplist.tmp\n- V e r i l a t i o n   R e p o r t: Verilator 5.046 2026-02-28 rev vUNKNOWN-built20260228\n- Verilator: Built from 0.072 MB sources in 4 modules, into 0.114 MB in 7 C++ files needing 0.001 MB\n- Verilator: Walltime 2.678 s (elab=0.001, cvt=0.006, bld=2.667); cpu 0.012 s on 1 threads; allocated 12.031 MB\nFAIL younger_ready_committed_before_head\n[37000] %Fatal: tb.sv:76: Assertion failed in tb\n%Error: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_ptw6u7vc/tb.sv:76: Verilog $stop\nAborting...\n",
+        "stderr_tail": "                                                                  : ... note: In instance 'tb.dut'\n   57 |             head <= head + 4'd1;\n      |                          ^\n                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.046\n                      ... Use \"/* verilator lint_off WIDTHEXPAND */\" and lint_on around source to disable this message.\n%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_ptw6u7vc/candidate.sv:69:30: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                      : ... note: In instance 'tb.dut'\n   69 |                 tail <= head + 4'd1;  \n      |                              ^\n%Warning-WIDTHEXPAND: /var/folders/d3/x90j5msx13xgc62cbzqspwmw0000gn/T/p10_ptw6u7vc/candidate.sv:114:26: Operator ADD expects 6 bits on the RHS, but RHS's CONST '4'h1' generates 4 bits.\n                                                                                                       : ... note: In instance 'tb.dut'\n  114 |             tail <= tail + 4'd1;\n      |                          ^\n",
+        "workdir": null
+      },
+      "reason": "FAIL younger_ready_committed_before_head"
+    }
+  }
+]

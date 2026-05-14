@@ -216,11 +216,13 @@ remaining incomplete for the full processor.
 \section*{Reproducibility}
 The project includes the source code, dated prediction file, generated result
 JSON, and validation artifacts required to audit the comparison. No API keys are
-stored in the submitted files; the OpenAI key is read from the environment.
+stored in the submitted files; the OpenAI key is read from the environment. The
+GitHub repository is
+\url{https://github.com/Vayung2/rtl-debugging-agent}.
 
 To validate the bug suite:
 \begin{lstlisting}[basicstyle=\ttfamily\small]
-cd FinalProject
+cd rtl-debugging-agent
 python3 evaluate.py --validate-cases-only --real-only \
   --output-json real_case_validation.json
 \end{lstlisting}

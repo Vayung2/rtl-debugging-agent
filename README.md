@@ -6,6 +6,8 @@ This project studies a realistic hardware-debug question:
 
 The benchmark is built from a Verilator-compatible ECE 411 out-of-order processor codebase. The strongest part of the project is the real-bug pipeline: mine historical RTL bug-fix commits, recreate the bug as a targeted mutation, write a focused verifier, generate debug artifacts, ask an LLM to repair the RTL, and validate the result with hidden simulation tests.
 
+GitHub: <https://github.com/Vayung2/rtl-debugging-agent>
+
 ## Main Result
 
 The main real-history fault-localization study uses five bugs mined from ECE 411 commit history, three evidence conditions, and three trials per condition.

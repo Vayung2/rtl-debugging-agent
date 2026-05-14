@@ -1,8 +1,4 @@
-# Verification-Guided RTL Repair Agent
-
-Resume-facing title:
-
-**Verification-Guided RTL Repair Agent for Out-of-Order Processor Bugs**
+**RTL Debugging Agent for Out-of-Order Processor Bugs**
 
 This project studies a realistic hardware-debug question:
 
